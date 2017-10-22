@@ -4,7 +4,11 @@ const int MAX_BUF_SIZE = 1024;
 
 LoginDemoBll::LoginDemoBll(LOGIN_INFO* loginInfo):loginInfo_(loginInfo)
 {
-    loginDemoDal_.loadingDataBase();
+}
+
+bool LoginDemoBll::initDatabase()
+{
+   return  loginDemoDal_.loadingDataBase();
 }
 
 LOGIN_RESULT LoginDemoBll::checkUserInfo()

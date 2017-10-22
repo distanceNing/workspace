@@ -19,10 +19,17 @@ int main()
         std::cout<<"Wait for Connection ----- \n";
         listen_sock.Accept(client_sock, fromIP, fromPort);
         std::cout << "From IP: " << fromIP << "-- From Port: " << fromPort << "---Login" << std::endl;
+        
         LOGIN_INFO login_info;
         memset(&login_info,0,sizeof(LOGIN_INFO));
         client_sock.Receive(&login_info,sizeof(LOGIN_INFO));
         LoginDemoBll bll(&login_info);
+
+        if(!bll.initDatabase())
+        {
+            printErrorMsg("init Database");
+        }
+        
         int login_result=bll.checkUserInfo();
         client_sock.Send(&login_result,sizeof(int));
         std::cout<< login_info.user_id<<"----login"<<"result is "<<login_result<<std::endl;

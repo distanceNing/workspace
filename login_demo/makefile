@@ -2,17 +2,10 @@ obj=dal.o bll.o \
 	tcp_socket.o  mysql_data.o mysql_cpp.o main.o
 
 
-VPATH=net_helper sql_helper bll dal obj
-
-
+VPATH=net_helper sql_helper bll dal 
 
 demo:$(obj)
 	g++    -o demo $(obj) -I/usr/include/mysql -L/usr/lib/mysql -lpthread -lmysqlclient 
-
-client:$(client_obj)
-	g++    -o client $(client_obj)
-
-client.o: tcp_socket.h client.cpp
 
 main.o:common.h tcp_socket.h main.cpp
 

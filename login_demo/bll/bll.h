@@ -11,6 +11,8 @@ class LoginDemoBll
 public:
     LoginDemoBll(LOGIN_INFO* loginInfo);
     
+    bool initDatabase();
+
     LOGIN_RESULT checkUserInfo();
 
     ~LoginDemoBll(){}
