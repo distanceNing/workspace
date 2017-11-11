@@ -6,9 +6,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->photo ->setPixmap(QPixmap(":/resoures/images/touxiang.jpg"));
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+
 }

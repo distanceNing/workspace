@@ -1,1 +1,6 @@
-<RCC/>
+<RCC>
+    <qresource prefix="/resoures">
+        <file>images/chat_icon.png</file>
+        <file>images/touxiang.jpg</file>
+    </qresource>
+</RCC>
