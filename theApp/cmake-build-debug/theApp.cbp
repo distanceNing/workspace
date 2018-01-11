@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="theApp"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/mnt/hgfs/shared/workspace/theApp/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j2 -f &quot;/mnt/hgfs/shared/workspace/theApp/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j2 -f &quot;/mnt/hgfs/shared/workspace/theApp/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j2 -f &quot;/mnt/hgfs/shared/workspace/theApp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j2 -f &quot;/mnt/hgfs/shared/workspace/theApp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/mnt/hgfs/shared/workspace/theApp/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j2 -f &quot;/mnt/hgfs/shared/workspace/theApp/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j2 -f &quot;/mnt/hgfs/shared/workspace/theApp/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j2 -f &quot;/mnt/hgfs/shared/workspace/theApp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j2 -f &quot;/mnt/hgfs/shared/workspace/theApp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/mnt/hgfs/shared/workspace/theApp/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j2 -f &quot;/mnt/hgfs/shared/workspace/theApp/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j2 -f &quot;/mnt/hgfs/shared/workspace/theApp/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j2 -f &quot;/mnt/hgfs/shared/workspace/theApp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j2 -f &quot;/mnt/hgfs/shared/workspace/theApp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="theApp">
+				<Option output="/mnt/hgfs/shared/workspace/theApp/cmake-build-debug/theApp" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/hgfs/shared/workspace/theApp/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/mnt/hgfs/shared/workspace/theApp/openssl/include"/>
+					<Add directory="/mnt/hgfs/shared/workspace/theApp/include"/>
+					<Add directory="/mnt/hgfs/shared/workspace/theApp/googletest/include"/>
+					<Add directory="/usr/include/c++/4.8"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.8"/>
+					<Add directory="/usr/include/c++/4.8/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j2 -f &quot;/mnt/hgfs/shared/workspace/theApp/cmake-build-debug/Makefile&quot;  VERBOSE=1 theApp"/>
+					<CompileFile command="/usr/bin/make -j2 -f &quot;/mnt/hgfs/shared/workspace/theApp/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j2 -f &quot;/mnt/hgfs/shared/workspace/theApp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j2 -f &quot;/mnt/hgfs/shared/workspace/theApp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="theApp/fast">
+				<Option output="/mnt/hgfs/shared/workspace/theApp/cmake-build-debug/theApp" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/hgfs/shared/workspace/theApp/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/mnt/hgfs/shared/workspace/theApp/openssl/include"/>
+					<Add directory="/mnt/hgfs/shared/workspace/theApp/include"/>
+					<Add directory="/mnt/hgfs/shared/workspace/theApp/googletest/include"/>
+					<Add directory="/usr/include/c++/4.8"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.8"/>
+					<Add directory="/usr/include/c++/4.8/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j2 -f &quot;/mnt/hgfs/shared/workspace/theApp/cmake-build-debug/Makefile&quot;  VERBOSE=1 theApp/fast"/>
+					<CompileFile command="/usr/bin/make -j2 -f &quot;/mnt/hgfs/shared/workspace/theApp/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j2 -f &quot;/mnt/hgfs/shared/workspace/theApp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j2 -f &quot;/mnt/hgfs/shared/workspace/theApp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/mnt/hgfs/shared/workspace/theApp/FileMd5.cpp">
+			<Option target="theApp"/>
+		</Unit>
+		<Unit filename="/mnt/hgfs/shared/workspace/theApp/FileMd5.h">
+			<Option target="theApp"/>
+		</Unit>
+		<Unit filename="/mnt/hgfs/shared/workspace/theApp/Protocol.cpp">
+			<Option target="theApp"/>
+		</Unit>
+		<Unit filename="/mnt/hgfs/shared/workspace/theApp/Protocol.h">
+			<Option target="theApp"/>
+		</Unit>
+		<Unit filename="/mnt/hgfs/shared/workspace/theApp/common.h">
+			<Option target="theApp"/>
+		</Unit>
+		<Unit filename="/mnt/hgfs/shared/workspace/theApp/main.cpp">
+			<Option target="theApp"/>
+		</Unit>
+		<Unit filename="/mnt/hgfs/shared/workspace/theApp/sql_helper/mysql.cpp">
+			<Option target="theApp"/>
+		</Unit>
+		<Unit filename="/mnt/hgfs/shared/workspace/theApp/sql_helper/mysql.h">
+			<Option target="theApp"/>
+		</Unit>
+		<Unit filename="/mnt/hgfs/shared/workspace/theApp/sql_helper/mysql_data.cpp">
+			<Option target="theApp"/>
+		</Unit>
+		<Unit filename="/mnt/hgfs/shared/workspace/theApp/sql_helper/mysql_data.h">
+			<Option target="theApp"/>
+		</Unit>
+		<Unit filename="/mnt/hgfs/shared/workspace/theApp/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
