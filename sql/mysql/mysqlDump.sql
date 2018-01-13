@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.20, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.19, for Win64 (x86_64)
 --
 -- Host: localhost    Database: workspace
 -- ------------------------------------------------------
--- Server version	5.7.20-0ubuntu0.16.04.1
+-- Server version	5.7.19-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -23,15 +23,13 @@ DROP TABLE IF EXISTS `directory`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `directory` (
-  `dir_id` int(11) NOT NULL AUTO_INCREMENT,
-  `dir_name` varchar(128) NOT NULL,
+  `dir_id` varchar(128) NOT NULL DEFAULT '/',
+  `dir_name` varchar(64) NOT NULL,
   `dir_parent` int(11) NOT NULL,
   `dir_time` datetime NOT NULL,
   `dir_status` tinyint(1) NOT NULL,
-  `user_id` varchar(16) NOT NULL,
-  PRIMARY KEY (`dir_id`),
-  KEY `FK_user_directory` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`dir_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -59,7 +57,7 @@ CREATE TABLE `file` (
   `file_path` varchar(128) NOT NULL,
   `file_remark` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`file_md5`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -80,14 +78,14 @@ DROP TABLE IF EXISTS `file_dir`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `file_dir` (
   `file_dir_id` int(11) NOT NULL AUTO_INCREMENT,
-  `dir_id` int(11) NOT NULL,
-  `file_md5` varchar(32) NOT NULL,
+  `dir_id` varchar(128) NOT NULL DEFAULT '/',
+  `file_md5` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`file_dir_id`),
-  KEY `FK_directory_file_dir` (`dir_id`),
   KEY `FK_file_file_dir` (`file_md5`),
-  CONSTRAINT `FK_directory_file_dir` FOREIGN KEY (`dir_id`) REFERENCES `directory` (`dir_id`),
+  KEY `FK_dir_file_dir` (`dir_id`),
+  CONSTRAINT `FK_dir_file_dir` FOREIGN KEY (`dir_id`) REFERENCES `directory` (`dir_id`),
   CONSTRAINT `FK_file_file_dir` FOREIGN KEY (`file_md5`) REFERENCES `file` (`file_md5`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -109,12 +107,13 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `user_id` varchar(16) NOT NULL,
   `user_passwd` varchar(32) NOT NULL,
-  `user_time` datetime NOT NULL,
-  `user_ip` varchar(32) NOT NULL,
-  `user_vip` int(11) NOT NULL,
   `user_name` varchar(32) NOT NULL,
+  `login_time` datetime DEFAULT NULL,
+  `login_ip` varchar(32) DEFAULT NULL,
+  `login_status` int(11) NOT NULL,
+  `user_vip` int(11) NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -124,6 +123,34 @@ CREATE TABLE `user` (
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user_dir`
+--
+
+DROP TABLE IF EXISTS `user_dir`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_dir` (
+  `user_dir_id` int(11) NOT NULL,
+  `user_id` varchar(16) NOT NULL,
+  `dir_id` varchar(128) NOT NULL,
+  PRIMARY KEY (`user_dir_id`),
+  KEY `FK_user_user_dir` (`user_id`),
+  KEY `FK_user_dir_file_dir` (`dir_id`),
+  CONSTRAINT `FK_user_dir_file_dir` FOREIGN KEY (`dir_id`) REFERENCES `directory` (`dir_id`),
+  CONSTRAINT `FK_user_user_dir` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_dir`
+--
+
+LOCK TABLES `user_dir` WRITE;
+/*!40000 ALTER TABLE `user_dir` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_dir` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -137,20 +164,20 @@ CREATE TABLE `user_file` (
   `user_file_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_file_name` varchar(128) NOT NULL,
   `user_file_time` datetime NOT NULL,
-  `user_file_permission` varchar(16) NOT NULL,
+  `user_file_ip` varchar(32) NOT NULL,
   `user_file_status` tinyint(1) NOT NULL,
   `user_file_hide` tinyint(1) NOT NULL,
-  `user_file_ip` varchar(32) NOT NULL,
+  `user_file_permission` int(11) NOT NULL,
   `user_file_path` varchar(128) NOT NULL,
   `file_md5` varchar(32) NOT NULL,
-  `user_file_remark` varchar(32) DEFAULT NULL,
   `user_id` varchar(16) NOT NULL,
+  `user_file_remark` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`user_file_id`),
   KEY `FK_file_user_file` (`file_md5`),
   KEY `FK_user_user_file` (`user_id`),
   CONSTRAINT `FK_file_user_file` FOREIGN KEY (`file_md5`) REFERENCES `file` (`file_md5`),
   CONSTRAINT `FK_user_user_file` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -171,17 +198,17 @@ DROP TABLE IF EXISTS `user_info`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user_info` (
   `user_info_id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_email` varchar(32) NOT NULL,
+  `user_email` varchar(32) DEFAULT NULL,
   `user_birthday` date DEFAULT NULL,
-  `user_phone` int(11) DEFAULT NULL,
-  `login_time` datetime NOT NULL,
-  `login_ip` varchar(32) NOT NULL,
-  `login_status` int(11) NOT NULL,
+  `user_phone` smallint(6) DEFAULT NULL,
+  `sign_time` datetime NOT NULL,
+  `sign_ip` varchar(32) NOT NULL,
+  `sign_status` int(11) NOT NULL,
   `user_id` varchar(16) NOT NULL,
   PRIMARY KEY (`user_info_id`),
   KEY `FK_user_user_info` (`user_id`),
   CONSTRAINT `FK_user_user_info` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -202,4 +229,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-01-13 12:59:40
+-- Dump completed on 2018-01-13 19:35:37
