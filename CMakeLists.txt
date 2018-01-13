@@ -14,8 +14,8 @@ LINK_DIRECTORIES(include/openssl/lib
        )
 
 set(SOURCE_FILES
-        sql_helper/mysql.cpp include/headers/mysql.h
-        sql_helper/dataset.cpp include/headers/dataset.h
+        sql/sql_helper/mysql.cpp include/headers/mysql.h
+        sql/sql_helper/dataset.cpp include/headers/dataset.h
 
         tests/test_config.cpp
         tests/test_mysql.cpp

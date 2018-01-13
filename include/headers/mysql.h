@@ -14,7 +14,7 @@
 #include <iostream>
 #include <string.h>
 #include <assert.h>
-#include "../../sql_helper/uncopyable.h"
+#include "uncopyable.h"
 
 class DataSet;
 
