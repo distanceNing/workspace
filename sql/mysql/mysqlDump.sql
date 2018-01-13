@@ -25,9 +25,9 @@ DROP TABLE IF EXISTS `directory`;
 CREATE TABLE `directory` (
   `dir_id` varchar(128) NOT NULL DEFAULT '/',
   `user_id` varchar(16) NOT NULL,
-  `dir_parent` int(11) NOT NULL,
+  `dir_parent` int(11) DEFAULT NULL,
   `dir_time` datetime NOT NULL,
-  `dir_status` tinyint(1) NOT NULL,
+  `dir_status` tinyint(1) NOT NULL DEFAULT '0',
   `dir_name` varchar(64) NOT NULL,
   PRIMARY KEY (`dir_id`,`user_id`),
   KEY `FK_user_dir` (`user_id`),
@@ -56,7 +56,7 @@ CREATE TABLE `file` (
   `file_name` varchar(128) NOT NULL,
   `file_size` mediumtext NOT NULL,
   `file_type` varchar(32) DEFAULT NULL,
-  `file_count` int(11) NOT NULL,
+  `file_count` int(11) NOT NULL DEFAULT '1',
   `file_path` varchar(128) NOT NULL,
   `file_remark` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`file_md5`)
@@ -113,8 +113,8 @@ CREATE TABLE `user` (
   `user_name` varchar(32) NOT NULL,
   `login_time` datetime DEFAULT NULL,
   `login_ip` varchar(32) DEFAULT NULL,
-  `login_status` int(11) NOT NULL,
-  `user_vip` int(11) NOT NULL,
+  `login_status` int(11) NOT NULL DEFAULT '0',
+  `user_vip` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -140,10 +140,10 @@ CREATE TABLE `user_file` (
   `user_file_name` varchar(128) NOT NULL,
   `user_file_time` datetime NOT NULL,
   `user_file_ip` varchar(32) NOT NULL,
-  `user_file_status` tinyint(1) NOT NULL,
-  `user_file_hide` tinyint(1) NOT NULL,
-  `user_file_permission` int(11) NOT NULL,
-  `user_file_path` varchar(128) NOT NULL,
+  `user_file_status` tinyint(1) NOT NULL DEFAULT '0',
+  `user_file_hide` tinyint(1) NOT NULL DEFAULT '0',
+  `user_file_permission` smallint(6) NOT NULL DEFAULT '1',
+  `user_file_path` varchar(128) NOT NULL DEFAULT '/',
   `file_md5` varchar(32) NOT NULL,
   `user_id` varchar(16) NOT NULL,
   `user_file_remark` varchar(32) DEFAULT NULL,
@@ -173,12 +173,12 @@ DROP TABLE IF EXISTS `user_info`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user_info` (
   `user_info_id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_email` varchar(32) DEFAULT NULL,
-  `user_birthday` date DEFAULT NULL,
+  `user_email` varchar(32) NOT NULL,
+  `user_birthday` date DEFAULT '1970-01-01',
   `user_phone` smallint(6) DEFAULT NULL,
   `sign_time` datetime NOT NULL,
   `sign_ip` varchar(32) NOT NULL,
-  `sign_status` int(11) NOT NULL,
+  `sign_status` int(11) NOT NULL DEFAULT '0',
   `user_id` varchar(16) NOT NULL,
   PRIMARY KEY (`user_info_id`),
   KEY `FK_user_user_info` (`user_id`),
@@ -204,4 +204,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-01-13 20:37:43
+-- Dump completed on 2018-01-13 21:43:27

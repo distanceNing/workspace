@@ -2,9 +2,9 @@ create table directory
 (
 	dir_id varchar(128) default '/' not null,
 	user_id varchar(16) not null,
-	dir_parent int not null,
+	dir_parent int null,
 	dir_time datetime not null,
-	dir_status tinyint(1) not null,
+	dir_status tinyint(1) default '0' not null,
 	dir_name varchar(64) not null,
 	primary key (dir_id, user_id)
 )
@@ -22,7 +22,7 @@ create table file
 	file_name varchar(128) not null,
 	file_size mediumtext not null,
 	file_type varchar(32) null,
-	file_count int not null,
+	file_count int default '1' not null,
 	file_path varchar(128) not null,
 	file_remark varchar(32) null
 )
@@ -59,8 +59,8 @@ create table user
 	user_name varchar(32) not null,
 	login_time datetime null,
 	login_ip varchar(32) null,
-	login_status int not null,
-	user_vip int not null
+	login_status int default '0' not null,
+	user_vip int default '0' not null
 )
 engine=InnoDB
 ;
@@ -77,10 +77,10 @@ create table user_file
 	user_file_name varchar(128) not null,
 	user_file_time datetime not null,
 	user_file_ip varchar(32) not null,
-	user_file_status tinyint(1) not null,
-	user_file_hide tinyint(1) not null,
-	user_file_permission int not null,
-	user_file_path varchar(128) not null,
+	user_file_status tinyint(1) default '0' not null,
+	user_file_hide tinyint(1) default '0' not null,
+	user_file_permission smallint(6) default '1' not null,
+	user_file_path varchar(128) default '/' not null,
 	file_md5 varchar(32) not null,
 	user_id varchar(16) not null,
 	user_file_remark varchar(32) null,
@@ -104,12 +104,12 @@ create table user_info
 (
 	user_info_id int auto_increment
 		primary key,
-	user_email varchar(32) null,
-	user_birthday date null,
+	user_email varchar(32) not null,
+	user_birthday date default '1970-01-01' null,
 	user_phone smallint(6) null,
 	sign_time datetime not null,
 	sign_ip varchar(32) not null,
-	sign_status int not null,
+	sign_status int default '0' not null,
 	user_id varchar(16) not null,
 	constraint FK_user_user_info
 		foreign key (user_id) references user (user_id)
