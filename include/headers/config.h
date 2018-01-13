@@ -10,7 +10,9 @@ typedef struct {
   std::string sql_host;
   std::string sql_pass;
   std::string sql_user;
-  uint16_t listen_port;
+  uint32_t listen_port;
+  uint32_t max_mysql_connections;
+  uint32_t min_mysql_connections;
 } Config;
 
 extern Config gServerConfig;

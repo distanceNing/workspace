@@ -26,7 +26,7 @@ set(SOURCE_FILES
         src/Protocol.cpp include/headers/Protocol.h
         src/File.cpp include/headers/File.h
         include/headers/common.h
-        src/main.cpp)
+        src/main.cpp src/Dao.cpp include/headers/Dao.h src/MySqlConnPool.cpp include/headers/MySqlConnPool.h)
 
 add_executable(theApp ${SOURCE_FILES})
 

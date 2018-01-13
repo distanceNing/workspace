@@ -24,9 +24,9 @@ public:
 
     }
     /*
-     * @descriprion: calc file md5 value
-     * @param:       file name
-     * @return:      return "" open file error  return !="" is file md5 value
+     * @brief : calc file md5 value
+     * @param : file name
+     * @return: return "" open file error  return !="" is file md5 value
      */
     static std::string calcMd5Value(std::string file_name);
 
