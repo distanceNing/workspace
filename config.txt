@@ -1,0 +1,8 @@
+
+SERVER_PORT 8000
+SQL_NAME workspace
+SQL_HOST 120.79.16.72
+SQL_PASS guochen
+SQL_USER root
+
+

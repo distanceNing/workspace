@@ -10,15 +10,21 @@ INCLUDE_DIRECTORIES(
 
 set(CMAKE_CXX_STANDARD 14)
 
-LINK_DIRECTORIES(include/openssl/lib)
+LINK_DIRECTORIES(include/openssl/lib
+       )
 
 set(SOURCE_FILES
-        sql_helper/mysql.cpp sql_helper/mysql.h
-        sql_helper/mysql_data.cpp sql_helper/mysql_data.h
+        sql_helper/mysql.cpp include/headers/mysql.h
+        sql_helper/dataset.cpp include/headers/dataset.h
+
+        tests/test_config.cpp
+        tests/test_mysql.cpp
 
 
+
+        src/config.cpp include/headers/config.h
         src/Protocol.cpp include/headers/Protocol.h
-        src/FileMd5.cpp include/headers/FileMd5.h
+        src/File.cpp include/headers/File.h
         include/headers/common.h
         src/main.cpp)
 
@@ -27,7 +33,7 @@ add_executable(theApp ${SOURCE_FILES})
 target_link_libraries(
         theApp
         libssl.a
-        include/googletest/make/gtest_main.a
+        ${PROJECT_SOURCE_DIR}/include/googletest/make/gtest_main.a
         libcrypto.a
         pthread
         mysqlclient
