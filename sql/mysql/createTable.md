@@ -1,12 +1,18 @@
 create table directory
 (
-	dir_id varchar(128) default '/' not null
-		primary key,
-	dir_name varchar(64) not null,
+	dir_id varchar(128) default '/' not null,
+	user_id varchar(16) not null,
 	dir_parent int not null,
 	dir_time datetime not null,
-	dir_status tinyint(1) not null
+	dir_status tinyint(1) not null,
+	dir_name varchar(64) not null,
+	primary key (dir_id, user_id)
 )
+engine=InnoDB
+;
+
+create index FK_user_dir
+	on directory (user_id)
 ;
 
 create table file
@@ -20,6 +26,7 @@ create table file
 	file_path varchar(128) not null,
 	file_remark varchar(32) null
 )
+engine=InnoDB
 ;
 
 create table file_dir
@@ -33,14 +40,15 @@ create table file_dir
 	constraint FK_file_file_dir
 		foreign key (file_md5) references file (file_md5)
 )
-;
-
-create index FK_file_file_dir
-	on file_dir (file_md5)
+engine=InnoDB
 ;
 
 create index FK_dir_file_dir
 	on file_dir (dir_id)
+;
+
+create index FK_file_file_dir
+	on file_dir (file_md5)
 ;
 
 create table user
@@ -54,27 +62,12 @@ create table user
 	login_status int not null,
 	user_vip int not null
 )
+engine=InnoDB
 ;
 
-create table user_dir
-(
-	user_dir_id int not null
-		primary key,
-	user_id varchar(16) not null,
-	dir_id varchar(128) not null,
-	constraint FK_user_user_dir
-		foreign key (user_id) references user (user_id),
-	constraint FK_user_dir_file_dir
-		foreign key (dir_id) references directory (dir_id)
-)
-;
-
-create index FK_user_user_dir
-	on user_dir (user_id)
-;
-
-create index FK_user_dir_file_dir
-	on user_dir (dir_id)
+alter table directory
+	add constraint FK_user_dir
+		foreign key (user_id) references user (user_id)
 ;
 
 create table user_file
@@ -96,6 +89,7 @@ create table user_file
 	constraint FK_user_user_file
 		foreign key (user_id) references user (user_id)
 )
+engine=InnoDB
 ;
 
 create index FK_file_user_file
@@ -120,6 +114,7 @@ create table user_info
 	constraint FK_user_user_info
 		foreign key (user_id) references user (user_id)
 )
+engine=InnoDB
 ;
 
 create index FK_user_user_info

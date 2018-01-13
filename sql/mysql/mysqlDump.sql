@@ -24,11 +24,14 @@ DROP TABLE IF EXISTS `directory`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `directory` (
   `dir_id` varchar(128) NOT NULL DEFAULT '/',
-  `dir_name` varchar(64) NOT NULL,
+  `user_id` varchar(16) NOT NULL,
   `dir_parent` int(11) NOT NULL,
   `dir_time` datetime NOT NULL,
   `dir_status` tinyint(1) NOT NULL,
-  PRIMARY KEY (`dir_id`)
+  `dir_name` varchar(64) NOT NULL,
+  PRIMARY KEY (`dir_id`,`user_id`),
+  KEY `FK_user_dir` (`user_id`),
+  CONSTRAINT `FK_user_dir` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -126,34 +129,6 @@ LOCK TABLES `user` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `user_dir`
---
-
-DROP TABLE IF EXISTS `user_dir`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user_dir` (
-  `user_dir_id` int(11) NOT NULL,
-  `user_id` varchar(16) NOT NULL,
-  `dir_id` varchar(128) NOT NULL,
-  PRIMARY KEY (`user_dir_id`),
-  KEY `FK_user_user_dir` (`user_id`),
-  KEY `FK_user_dir_file_dir` (`dir_id`),
-  CONSTRAINT `FK_user_dir_file_dir` FOREIGN KEY (`dir_id`) REFERENCES `directory` (`dir_id`),
-  CONSTRAINT `FK_user_user_dir` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `user_dir`
---
-
-LOCK TABLES `user_dir` WRITE;
-/*!40000 ALTER TABLE `user_dir` DISABLE KEYS */;
-/*!40000 ALTER TABLE `user_dir` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `user_file`
 --
 
@@ -229,4 +204,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-01-13 19:35:37
+-- Dump completed on 2018-01-13 20:37:43
