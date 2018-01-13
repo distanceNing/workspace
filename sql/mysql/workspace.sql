@@ -29,7 +29,8 @@ CREATE TABLE `directory` (
   `dir_time` datetime NOT NULL,
   `dir_status` tinyint(1) NOT NULL,
   `user_id` varchar(16) NOT NULL,
-  PRIMARY KEY (`dir_id`)
+  PRIMARY KEY (`dir_id`),
+  KEY `FK_user_directory` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -201,4 +202,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-01-13 11:42:21
+-- Dump completed on 2018-01-13 12:59:40
