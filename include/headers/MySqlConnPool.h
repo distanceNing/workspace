@@ -9,19 +9,18 @@
 #ifndef THEAPP_MYSQLCONNPOOL_H
 #define THEAPP_MYSQLCONNPOOL_H
 #include <vector>
+#include <memory>
 #include "config.h"
 #include "headers/mysql.h"
 
+
 class MySqlConnPool {
 public:
-    typedef struct {
-      MySQL mysql_conn;
-      uint32_t conn_ref_num;
-    } MysqlConn;
-    using MysqlConnList=std::vector<MysqlConn>;
+
+    using MysqlConnPtr =std::shared_ptr<MySQL>;
+    using MysqlConnList=std::vector<MySQL*>;
     MySqlConnPool()
-            :mysqlConnList_(config::gServerConfig.min_mysql_connections),
-             curFreeConnNum_((uint32_t) mysqlConnList_.size())
+            :mysqlConnList_(config::gServerConfig.min_mysql_connections,new MySQL()),curUsingNum_(0)
     {
     }
     /*
@@ -34,22 +33,29 @@ public:
      * @brief:分配一个可用的数据库连接
      *
      **/
-    MySQL* repeatConnection();
+    MysqlConnPtr repeatConnection();
 
     /*
      * @brief:归还一个数据库连接
      *
      **/
-    void returnConnection(MysqlConn* conn)
+    void returnConnection(MySQL* conn)
     {
-        conn->conn_ref_num--;
-        curFreeConnNum_++;
+        curUsingNum_--;
+        mysqlConnList_.emplace_back(conn);
     }
 
     size_t getActiveSize() const
     {
-        return mysqlConnList_.size() - curFreeConnNum_;
+        return mysqlConnList_.size();
     }
+
+    void destory()
+    {
+        for(auto& i :mysqlConnList_)
+            delete(i);
+    }
+
 
     ~MySqlConnPool()
     {
@@ -57,7 +63,7 @@ public:
 
 private:
     MysqlConnList mysqlConnList_;
-    uint32_t curFreeConnNum_;
+    uint32_t curUsingNum_;
 };
 
 #endif //THEAPP_MYSQLCONNPOOL_H

@@ -17,6 +17,7 @@ enum DaoType {
 };
 
 class DataSet;
+
 class Dao {
 public:
     Dao()
@@ -24,6 +25,7 @@ public:
     }
 
     virtual void query()=0;
+
     virtual ~Dao()
     {
     }
@@ -39,23 +41,10 @@ protected:
     MySQL* mysqlConn_;
 };
 
-class DaoFactory {
-public:
-    std::shared_ptr<Dao> createDao(DaoType type)
-    {
-        switch (type) {
-        case Login:return std::make_shared<LoginDao>();
-        case Upload:return std::make_shared<UploadDao>();
-        case DownLoad: return std::make_shared<DownloadDao>();
-        }
-        return std::shared_ptr<Dao>();
-    }
-
-};
 
 class LoginDao : public Dao {
 public:
-    LoginDao(const char* sql)
+    LoginDao()
     {
     }
 
@@ -71,7 +60,26 @@ public:
 };
 
 class UploadDao : public Dao {
+public:
+    void query(){}
 };
 class DownloadDao : public Dao {
+public:
+    void query(){}
 };
+
+class DaoFactory {
+public:
+    static std::shared_ptr<Dao> createDao(DaoType type)
+    {
+        switch (type) {
+        case Login:return std::make_shared<LoginDao>();
+        case Upload:return std::make_shared<UploadDao>();
+        case DownLoad: return std::make_shared<DownloadDao>();
+        }
+        return std::shared_ptr<Dao>();
+    }
+};
+
+
 #endif //THEAPP_DAO_H

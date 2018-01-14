@@ -10,34 +10,42 @@ using namespace config;
 bool MySqlConnPool::connect()
 {
     for (auto& i:mysqlConnList_) {
-        if ( !i.mysql_conn.connectMySQL(gServerConfig.sql_host.c_str(), gServerConfig.sql_user.c_str(),
+        if ( !i->connectMySQL(gServerConfig.sql_host.c_str(), gServerConfig.sql_user.c_str(),
                 gServerConfig.sql_pass.c_str(), gServerConfig.sql_name.c_str(), 0, NULL, 0));
         return false;
     }
     return true;
 }
-MySQL* MySqlConnPool::repeatConnection()
+MySqlConnPool::MysqlConnPtr MySqlConnPool::repeatConnection()
 {
-    if ( curFreeConnNum_ > 0 ) {
-        for (auto& i :mysqlConnList_) {
-            if ( i.conn_ref_num == 0 ) {
-                return &i.mysql_conn;
-            }
-        }
-        curFreeConnNum_--;
+
+    if ( !mysqlConnList_.empty()) {
+        curUsingNum_++;
+        MySQL* conn = mysqlConnList_.back();
+        mysqlConnList_.pop_back();
+        return std::shared_ptr<MySQL>(conn,[this](MySQL* p){
+          //deletor
+          this->returnConnection(p);
+        });
     }
     else if ( mysqlConnList_.size() < gServerConfig.max_mysql_connections ) {
-        MysqlConn conn;
-        mysqlConnList_.push_back(std::move(conn));
-        MySQL* mysql = &mysqlConnList_.back().mysql_conn;
+        mysqlConnList_.emplace_back();
+        MySQL* mysql = mysqlConnList_.back();
         if ( mysql->connectMySQL(gServerConfig.sql_host.c_str(), gServerConfig.sql_user.c_str(),
                 gServerConfig.sql_pass.c_str(), gServerConfig.sql_name.c_str(), 0, NULL, 0))
-            return mysql;
+        {
+            curUsingNum_++;
+            return std::shared_ptr<MySQL>(mysql, [this](MySQL* conn) {
+              //deletor
+              this->returnConnection(conn);
+            });
+        }
         else
             return nullptr;
     }
     else if ( mysqlConnList_.size() == gServerConfig.max_mysql_connections ) {
         //add a timer wait a free connection
     }
-    return NULL;
+
+    return nullptr;
 }

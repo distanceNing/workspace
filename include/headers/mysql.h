@@ -14,6 +14,7 @@
 #include <iostream>
 #include <string.h>
 #include <assert.h>
+#include <memory>
 #include "uncopyable.h"
 
 class DataSet;
