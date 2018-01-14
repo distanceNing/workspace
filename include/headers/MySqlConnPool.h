@@ -54,6 +54,7 @@ public:
     {
         for(auto& i :mysqlConnList_)
             delete(i);
+        mysqlConnList_.clear();
     }
 
 

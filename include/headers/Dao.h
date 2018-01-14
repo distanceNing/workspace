@@ -12,74 +12,20 @@
 #include <assert.h>
 #include "mysql.h"
 
-enum DaoType {
-  Login, Upload, DownLoad
-};
 
 class DataSet;
 
 class Dao {
-public:
-    Dao()
-    {
-    }
 
-    virtual void query()=0;
 
-    virtual ~Dao()
-    {
-    }
-protected:
-    /*
-     * @brief:从数据库连接池中拿出一个可用的连接
-     */
-    void getAFreeConn()
-    {
-        //mysqlConn_=
-    }
-
-    MySQL* mysqlConn_;
+    static bool loaginDao(std::string user_no);
+    static std::shared_ptr<MySQL> getAFreeConn();
 };
 
 
-class LoginDao : public Dao {
-public:
-    LoginDao()
-    {
-    }
 
-    void query()
-    {
-        //this->getAFreeConn();
-    }
 
-    virtual ~LoginDao()
-    {
 
-    }
-};
-
-class UploadDao : public Dao {
-public:
-    void query(){}
-};
-class DownloadDao : public Dao {
-public:
-    void query(){}
-};
-
-class DaoFactory {
-public:
-    static std::shared_ptr<Dao> createDao(DaoType type)
-    {
-        switch (type) {
-        case Login:return std::make_shared<LoginDao>();
-        case Upload:return std::make_shared<UploadDao>();
-        case DownLoad: return std::make_shared<DownloadDao>();
-        }
-        return std::shared_ptr<Dao>();
-    }
-};
 
 
 #endif //THEAPP_DAO_H

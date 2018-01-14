@@ -12,8 +12,8 @@
 
 #include <mysql/mysql.h>
 #include <iostream>
-#include <string.h>
-#include <assert.h>
+#include <cstring>
+#include <cassert>
 #include <memory>
 #include "uncopyable.h"
 
