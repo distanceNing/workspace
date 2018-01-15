@@ -6,7 +6,7 @@
 // Copyright (c) yangning All rights reserved.
 //
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 #include "headers/Protocol.h"
 #include "rapidjson/prettywriter.h" // for stringify JSON
 
