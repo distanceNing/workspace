@@ -13,6 +13,7 @@
 #include <iomanip>
 #include <cstring>
 #include "headers/common.h"
+
  namespace utility {
      bool File::calcMd5Value()
      {
@@ -113,7 +114,7 @@
          file += file_path;
          file += file_name;
 
-         std::string chunk_name;
+         //std::string chunk_name;
 
          MD5_CTX ctx;
          MD5_Init(&ctx);
@@ -141,19 +142,19 @@
              }
 
              /*文件块的信息，再发送的时候提取使用*/
-             filechunk.chunkmd5 = oss.str();
-             filechunk.chunknum = count;
+             filechunk.chunk_md5 = oss.str();
+             filechunk.chunk_num = count;
 
              std::ostringstream str;
              str<<count;
              number = str.str();
-             chunk_name += filefakemd5;
-             chunk_name += number;
-             std::cout<<chunk_name<<std::endl;
+             filechunk.chunk_name += filefakemd5;
+             filechunk.chunk_name += number;
+             std::cout<<filechunk.chunk_name<<std::endl;
 
              //std::cout<<oss.str()<<"                 "<<count<<std::endl;
              count++;
-             chunk_name = "";
+             filechunk.chunk_name = "";
          }
          return TRUE;
      }

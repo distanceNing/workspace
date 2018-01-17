@@ -19,8 +19,9 @@
 typedef struct chunk
 {
     /*存放每个文件块的信息*/
-    std::string chunkmd5;
-    unsigned long chunknum;
+    std::string chunk_md5;
+    unsigned long chunk_num;
+    std::string chunk_name;
 }CHUNK;
 
 namespace utility {
@@ -59,7 +60,7 @@ private:
     std::string filePath_;
     std::string fileName_;
     std::string fileMd5_;
-};
+};//class File
 }//namespace utility
 
 #endif //THEAPP_FILE_H
