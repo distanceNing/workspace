@@ -23,10 +23,10 @@ class TcpConnection;
 }
 
 namespace net {
-
+using TcpConnectionPtr=std::shared_ptr<TcpConnection>;
+using ConnectionCallBack = std::function<void (TcpConnectionPtr)>
 class TcpServer {
 public:
-    using TcpConnectionPtr=std::shared_ptr<TcpConnection>;
     using ConnectionMap=std::map<int, TcpConnectionPtr>;
 public:
     using ClientReadCallBack=std::function<void(TcpConnection&, SocketBuf*)>;

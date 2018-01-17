@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
-#define _TESTING
-
-
+//#define _TESTING
+#include "event_loop.h"
+#include "headers/Server.h"
 
 int main(int argc, char* argv[])
 {
@@ -10,6 +10,12 @@ int main(int argc, char* argv[])
     ::testing::InitGoogleTest(&argc, argv);
     return  RUN_ALL_TESTS();
 #else
+
+    net::EventLoop main_loop(net::POLL);
+
+    Server server(&main_loop);
+
+
     //theapp.run();
     return 0;
 #endif
