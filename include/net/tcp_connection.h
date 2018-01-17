@@ -21,6 +21,7 @@ class Channel;
 }
 namespace net {
 
+
 class TcpConnection :public std::enable_shared_from_this<TcpConnection>{
 public:
     enum ConnectState {

@@ -17,7 +17,7 @@
 class Server {
 public:
 
-    using SessionMap=std::map<net::TcpConnectionPtr,Session>;
+    using SessionMap=std::map<net::TcpServer::TcpConnectionPtr,Session>;
 
     Server(net::EventLoop* loop):tcpServer_(config::gServerConfig.listen_port,loop)
     {
