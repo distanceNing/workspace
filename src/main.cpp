@@ -1,8 +1,9 @@
-//#include "gtest/gtest.h"
+#include <headers/File.h>
+#include <headers/Server.h>
+#include "gtest/gtest.h"
 //#define _TESTING
-#include <string>
-#include <iostream>
-#include "headers/File.h"
+#include "event_loop.h"
+
 
 
 int main(int argc, char* argv[])
@@ -12,6 +13,12 @@ int main(int argc, char* argv[])
     ::testing::InitGoogleTest(&argc, argv);
     return  RUN_ALL_TESTS();
 #else
+
+    net::EventLoop main_loop(net::POLL);
+
+    Server server(&main_loop);
+
+
     //theapp.run();
 
     std::string fpath = "/home/roux/下载/";

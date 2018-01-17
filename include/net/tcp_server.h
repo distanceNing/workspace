@@ -11,7 +11,6 @@
 #include "net/socket/tcp_socket.h"
 #include "channel.h"
 #include "Acceptor.h"
-
 #include <functional>
 #include <list>
 #include <memory>
@@ -24,10 +23,13 @@ class TcpConnection;
 
 namespace net {
 
+
 class TcpServer {
 public:
     using TcpConnectionPtr=std::shared_ptr<TcpConnection>;
     using ConnectionMap=std::map<int, TcpConnectionPtr>;
+
+    using ConnectionCallBack = std::function<void (TcpConnectionPtr)>;
 public:
     using ClientReadCallBack=std::function<void(TcpConnection&, SocketBuf*)>;
     using ClientCloseCallBack=std::function<void(TcpConnectionPtr)>;

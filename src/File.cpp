@@ -60,6 +60,7 @@
          }
          unsigned char digest[MD5_DIGEST_LENGTH] = {};
          MD5_Final(digest, &ctx);
+
          std::ostringstream oss;
          for (unsigned i = 0; i < MD5_DIGEST_LENGTH; i++) {
              oss << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(digest[i]);
