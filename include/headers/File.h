@@ -33,7 +33,7 @@ public:
     }
 
     /*
-     * @brief : calc file md5 value
+     * @brief : calculate file md5
      * @param : file name and path
      * @return: return "" open file error  return !="" is file md5 value
      */

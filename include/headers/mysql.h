@@ -23,7 +23,7 @@ class MySQL : private uncopyable {
 
 public:
     MySQL():conn_ptr_ (mysql_init(NULL)){
-        assert(conn_ptr_!=NULL);
+        assert(conn_ptr_ != NULL);
     }
 
     bool connectMySQL(const char* host, const char* user, const char* passwd, const char* database, unsigned int port,
