@@ -39,8 +39,13 @@ set(SOURCE_FILES
         src/Protocol.cpp include/headers/Protocol.h
         src/File.cpp include/headers/File.h
         include/headers/common.h
+        src/producer.cpp src/producer.h
+        src/msg.cpp src/msg.h
+        src/consumer.cpp src/consumer.h
 
-        src/main.cpp src/Dao.cpp include/headers/Dao.h src/MySqlConnPool.cpp include/headers/MySqlConnPool.h src/Session.cpp include/headers/Session.h src/Server.cpp include/headers/Server.h)
+
+
+        src/main.cpp src/Dao.cpp include/headers/Dao.h src/MySqlConnPool.cpp include/headers/MySqlConnPool.h include/headers/Session.h include/headers/Server.h)
 
 
 add_executable(theApp ${SOURCE_FILES})

@@ -23,7 +23,7 @@ MySqlConnPool::MysqlConnPtr MySqlConnPool::repeatConnection()
         curUsingNum_++;
         MySQL* conn = mysqlConnList_.back();
         mysqlConnList_.pop_back();
-        return std::shared_ptr<MySQL>(conn,[this](MySQL* p){
+        return std::shared_ptr<MySQL>(conn, [this](MySQL* p) {
           //deletor
           this->returnConnection(p);
         });
@@ -32,8 +32,7 @@ MySqlConnPool::MysqlConnPtr MySqlConnPool::repeatConnection()
         mysqlConnList_.emplace_back();
         MySQL* mysql = mysqlConnList_.back();
         if ( mysql->connectMySQL(gServerConfig.sql_host.c_str(), gServerConfig.sql_user.c_str(),
-                gServerConfig.sql_pass.c_str(), gServerConfig.sql_name.c_str(), 0, NULL, 0))
-        {
+                gServerConfig.sql_pass.c_str(), gServerConfig.sql_name.c_str(), 0, NULL, 0)) {
             curUsingNum_++;
             return std::shared_ptr<MySQL>(mysql, [this](MySQL* conn) {
               //deletor

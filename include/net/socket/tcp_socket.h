@@ -24,10 +24,12 @@ public:
     TcpSocket()
     {
     }
-    static int create_and_bind(int port = 0, int af = AF_INET, int type = SOCK_STREAM);
+    static int create_and_bind( int af = AF_INET, int type = SOCK_STREAM);
+
 
     static bool sockConnect(int fd,const char* conn_ip,uint16_t conn_port);
 
+    static int noblockingConnect(int fd,const char* conn_ip,uint16_t conn_port,size_t time_out_ms);
     explicit TcpSocket(const int fd)
             :fd_(fd)
     {
@@ -45,6 +47,11 @@ public:
 
     int Accept(char* fromIP, UINT& fromPort);
 
+    ssize_t Send(net::SocketBuf& buf)
+    {
+        return ::send(fd_,buf.readBegin(),buf.readableBytes(),MSG_NOSIGNAL);
+    }
+
     ssize_t Send(const void * message, size_t bufLen);
 
     ssize_t write_n(const void* msg,size_t buf_len);
@@ -57,7 +64,7 @@ public:
 
     int getFd() const;
 
-    void setTcpNoDelay();
+    static void setTcpNoDelay(int fd);
 
     void shutDownWrite()
     {
