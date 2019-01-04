@@ -18,7 +18,7 @@ class DataSet;
 class Dao {
 
 
-    static bool loaginDao(std::string user_no);
+    static bool loginDao(std::string user_no);
     static std::shared_ptr<MySQL> getAFreeConn();
 };
 
