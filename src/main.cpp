@@ -1,8 +1,6 @@
-#include <headers/File.h>
-#include <headers/Server.h>
 #include "gtest/gtest.h"
 //#define _TESTING
-
+#include <headers/Protocol.h>
 #include "producer.h"
 
 #include "rapidjson/document.h"
@@ -13,7 +11,7 @@
 #include <string>
 
 #include "consumer.h"
-#define  _CONSUMTER
+//#define  _CONSUMTER
 void printMsgType()
 {
 

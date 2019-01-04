@@ -15,17 +15,10 @@ LINK_DIRECTORIES(include/openssl/lib
        )
 
 set(SOURCE_FILES
-        sql/sql_helper/mysql.cpp include/headers/mysql.h
-        sql/sql_helper/dataset.cpp include/headers/dataset.h
 
         include/net/socket/tcp_socket.h include/net/socket/tcp_socket.cpp
-        include/net/tcp_connection.cpp include/net/event_loop.cpp include/net/channel.cpp
-        include/net/socket/socket_buf.cpp include/net/tcp_server.cpp
-        include/net/poller/epoll_poller.cpp include/net/poller/poll_poller.cpp
-        include/net/Acceptor.cpp
 
 
-        include/net/thread/lock.cpp include/net/thread/Thread.cpp
 
 
 
@@ -37,7 +30,6 @@ set(SOURCE_FILES
 
         src/config.cpp include/headers/config.h
         src/Protocol.cpp include/headers/Protocol.h
-        src/File.cpp include/headers/File.h
         include/headers/common.h
         src/producer.cpp src/producer.h
         src/msg.cpp src/msg.h
@@ -45,7 +37,7 @@ set(SOURCE_FILES
 
 
 
-        src/main.cpp src/Dao.cpp include/headers/Dao.h src/MySqlConnPool.cpp include/headers/MySqlConnPool.h include/headers/Session.h include/headers/Server.h)
+        src/main.cpp )
 
 
 add_executable(theApp ${SOURCE_FILES})
@@ -56,5 +48,5 @@ target_link_libraries(
         #${PROJECT_SOURCE_DIR}/include/googletest/make/gtest_main.a
         libcrypto.a
         pthread
-        mysqlclient
+ #       mysqlclient
         )
